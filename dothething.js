@@ -16,13 +16,13 @@ rl.on('line', function(line) {
   if(line.trim().substr(0, 1) == 'p' && line.trim().substr(-1, 1) == '}') {
     var name = line.trim().split(' ').slice(2, 3);
     var fixedLine = fixLine(name[0], line);
-    rl.output.write('\t\t\t\t[Column("' + name + '", ' + columnPropGlobal + ')]\n');
+    rl.output.write('\t\t\t\t[Column("' + name + '"' + columnPropGlobal + ')]\n');
     rl.output.write(fixedLine + '\n');
+    if(columnPropGlobal != '') columnPropGlobal = '';
     
     // Column attribute line
   } else if(line.trim().substr(0, 7) == '[Column') {
-    columnPropGlobal = line.trim().match(/\(([^)]+)\)/)[1];
-    console.log(columnPropGlobal);
+    columnPropGlobal = ', ' + line.trim().match(/\(([^)]+)\)/)[1];
     
     // Other line
   } else {
