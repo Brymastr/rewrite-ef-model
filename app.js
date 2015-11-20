@@ -24,18 +24,30 @@ for(var file in inputFiles) {
   }
 }
 
-// Execute renamer for all files (list of filenames)
-for(var i in fileNames) {
-  
-  console.log(fileNames[i])
-  
+console.log("\n- - - - - - - - - - - - - - - - - - -")
+if(fileNames.length == 0) {
+  console.log("\nNo files to rewrite")
+} else {
+  console.log("\nRewriting files...\n");  
+  for(var i in fileNames) {
+    console.log(fileNames[i]);
+    rewrite(fileNames[i]);
+  }
+  console.log("\nFinished!")
+}
+console.log("\n- - - - - - - - - - - - - - - - - - -")
+
+
+
+//// FUNCTIONS ////
+
+function rewrite(filename) {
   var rl = readline.createInterface({
-    input: fs.createReadStream('./Input/' + fileNames[i]),
-    output: fs.createWriteStream('./Output/' + fileNames[i])
+    input: fs.createReadStream('./Input/' + filename),
+    output: fs.createWriteStream('./Output/' + filename)
   });
   
   var columnPropGlobal = "";
-  
   rl.on('line', function(line) {
     // Property name line
     if(line.trim().substr(0, 1) == 'p' && line.trim().substr(-1, 1) == '}') {
@@ -54,15 +66,15 @@ for(var i in fileNames) {
       rl.output.write(line + '\n');
     }
   });
-  
-  var fixLine = function(name, line) {
-    var components = name.toString().split('_');
-    var newName = "";
-    for(var i = 0; i < components.length; i++) {
-      newName += components[i].charAt(0).toUpperCase() + components[i].slice(1);
-    }
-  
-    return line.replace(/\w*_\w*/, newName);
-  };
-
 }
+
+
+function fixLine(name, line) {
+  var components = name.toString().split('_');
+  var newName = "";
+  for(var i = 0; i < components.length; i++) {
+    newName += components[i].charAt(0).toUpperCase() + components[i].slice(1);
+  }
+
+  return line.replace(/\w*_\w*/, newName);
+};
