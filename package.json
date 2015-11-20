@@ -1,12 +1,12 @@
 {
-  "name": "appthing",
+  "name": "C# Class Property Renamer",
   "version": "1.0.0",
-  "description": "",
-  "main": "dothething.js",
+  "description": "Rename underscore style property names to pascal-case property names and add references to the database column. Works for Entity Framework code-first classes.",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
-  "author": "",
+  "author": "Brycen Dorsay <dorsay@live.ca>",
   "license": "ISC",
   "dependencies": {
     "readline": "^1.1.0"
