@@ -1,4 +1,8 @@
 .idea/
 node_modules/
-Lot.cs
 .vscode
+
+Output/
+Input/
+
+*.log
